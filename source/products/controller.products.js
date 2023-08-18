@@ -1,15 +1,16 @@
 const { Router } = require("express")
+const ProductManager = require('../classes/ProductManager')
 
 const router = Router()
+const managerProducts = new ProductManager()
 
-router.get('/', (req, res) => {
-    res.render('products')
+router.get('/', async (req, res) => {
+    const allProducts = await managerProducts.getProducts()
+    console.log(allProducts)
+    res.render('products', {
+        products: allProducts,
+        style: 'products.styles.css'
+    })
 })
-
-router.post('/', (req, res) => { 
-   console.log(req.body)
-   res.json({message: 'usuario creado'})
-})
-
 
 module.exports = router
