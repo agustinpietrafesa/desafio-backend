@@ -19,21 +19,18 @@
 
     </form>
 
-    <h2>Delete Product</h2>
-        <form  id="deleteProduct">
-            <label for="id">Id:</label>
-            <input type="number" placeholder="Id" id="id" >
-            <button type="submit">Delete product</button>
-
-        </form>
-
     <h2>Our products in real time:</h2>
 
+
     {{#each products}}
-        <div>
+        <div > 
             <h4>Title: {{this.title}} Product description: {{this.description}} Code: {{this.code}} Stock: {{this.stock}} Id: {{this.id}}</h4>
         </div>
     {{/each}}
+
+    <div id="productsContainer">
+
+    </div>
 
 </div>
 

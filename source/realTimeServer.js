@@ -9,19 +9,17 @@ const managerProducts = new ProductManager()
 const realTimeServer = httpServer => {
     const io = new Server(httpServer)
 
+    
     io.on('connection', socket => {
-        console.log(`Se ha conectado el usuario ${socket.id}`)
+        console.log(`Cliente conectado ${socket.id}`)
 
-        socket.on('newProductAdded', data => {
-            managerProducts.addProduct(data)
+        socket.on('newProductAdded', async data => {
+            await managerProducts.addProduct(data)
+            const allProducts = await managerProducts.getProducts()
             console.log(data)
+            io.emit('newProductAdded', data);
+
         })
-
-        socket.on('deleteProduct', info => {
-            managerProducts.deleteProduct(info)
-        })
-
-
     })
 }
 
